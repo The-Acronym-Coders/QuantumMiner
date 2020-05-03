@@ -1,0 +1,10 @@
+modLoader="javafml"
+loaderVersion="[31,)"
+issueTrackerURL="https://github.com/The-Acronym-Coders/QuantumMiner/issues"
+[[mods]]
+modId="quantumminer"
+version="${file.version}"
+displayName="Quantum Miner"
+authors="Lanse505"
+description='''
+'''
