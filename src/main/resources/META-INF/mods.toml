@@ -1,10 +1,10 @@
 modLoader="javafml"
 loaderVersion="[31,)"
-issueTrackerURL="https://github.com/The-Acronym-Coders/QuantumMiner/issues"
+issueTrackerURL="https://github.com/The-Acronym-Coders/QuantumQuarry/issues"
 [[mods]]
-modId="quantumminer"
+modId="quantumquarry"
 version="${file.version}"
-displayName="Quantum Miner"
+displayName="Quantum Quarry"
 authors="Lanse505"
 description='''
 '''

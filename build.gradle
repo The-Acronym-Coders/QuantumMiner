@@ -20,34 +20,28 @@ sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = co
 
 minecraft {
     mappings channel: 'snapshot', version: '20200503-1.15.1'
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
     runs {
         client {
             workingDirectory project.file('run')
             mods {
-                quantumminer {
+                quantumquarry {
                     source sourceSets.main
                 }
             }
         }
-
         server {
             workingDirectory project.file('run')
             mods {
-                quantumminer {
+                quantumquarry {
                     source sourceSets.main
                 }
             }
         }
-
         data {
             workingDirectory project.file('run')
-            args '--mod', 'quantumminer', '--all', '--output', file('src/generated/resources/')
+            args '--mod', 'quantumquarry', '--all', '--output', file('generated')
             mods {
-                quantumminer {
+                quantumquarry {
                     source sourceSets.main
                 }
             }
