@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "quantumquarry:white_lens",
+    "quantumquarry:orange_lens",
+    "quantumquarry:magenta_lens",
+    "quantumquarry:light_blue_lens",
+    "quantumquarry:yellow_lens",
+    "quantumquarry:lime_lens",
+    "quantumquarry:pink_lens",
+    "quantumquarry:gray_lens",
+    "quantumquarry:light_gray_lens",
+    "quantumquarry:cyan_lens",
+    "quantumquarry:purple_lens",
+    "quantumquarry:blue_lens",
+    "quantumquarry:brown_lens",
+    "quantumquarry:green_lens",
+    "quantumquarry:red_lens",
+    "quantumquarry:black_lens"
+  ]
+}

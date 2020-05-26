@@ -1,0 +1,18 @@
+{
+  "conditions": [
+    {
+      "modid": "minecraft",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "weight": 15.0,
+  "lens": {
+    "item": "quantumquarry:red_lens"
+  },
+  "state": {
+    "block": "minecraft:redstone_ore",
+    "properties": {
+      "lit": "false"
+    }
+  }
+}

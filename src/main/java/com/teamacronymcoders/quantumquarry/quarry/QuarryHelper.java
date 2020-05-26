@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.loot.LootContext.Builder;
@@ -72,10 +73,11 @@ public class QuarryHelper {
      * @param compoundNBT Nullable NBT for Tile-Entity Ores
      * @return List of ItemStack Drops generated from LootTables
      */
-    public static List<ItemStack> getDrops(@Nonnull ServerWorld world, @Nonnull BlockState state, @Nullable ItemStack lens, @Nonnull ItemStack tool, @Nullable PlayerEntity playerEntity, @Nullable CompoundNBT compoundNBT) {
+    public static List<ItemStack> getDrops(@Nonnull BlockPos pos, @Nonnull ServerWorld world, @Nonnull BlockState state, @Nullable ItemStack lens, @Nonnull ItemStack tool, @Nullable PlayerEntity playerEntity, @Nullable CompoundNBT compoundNBT) {
         Builder context = new Builder(world)
             .withParameter(LootParameters.BLOCK_STATE, state)
-            .withParameter(LootParameters.TOOL, tool);
+            .withParameter(LootParameters.TOOL, tool)
+            .withParameter(LootParameters.POSITION, pos);
         if (lens != null) {
             context.withLuck(3.0F);
         }
@@ -107,12 +109,14 @@ public class QuarryHelper {
      * @return Returns the appropriate tool to use to break the tool.
      */
     public static ItemStack getAppropriateTool(BlockState state, SidedInventoryComponent toolInventory) {
-        switch (state.getHarvestTool().getName()) {
-            case "axe": return toolInventory.getStackInSlot(0);
-            case "shovel": return toolInventory.getStackInSlot(1);
-            case "pickaxe": return toolInventory.getStackInSlot(2);
-            default: return ItemStack.EMPTY;
+        if (state.getHarvestTool() != null) {
+            switch (state.getHarvestTool().getName()) {
+                case "axe": return toolInventory.getStackInSlot(0);
+                case "shovel": return toolInventory.getStackInSlot(1);
+                case "pickaxe": return toolInventory.getStackInSlot(2);
+            }
         }
+        return toolInventory.getStackInSlot(2);
     }
 
     /**

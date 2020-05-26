@@ -7,7 +7,6 @@ import net.minecraft.util.ResourceLocation;
 
 public class MinerEntry {
 
-    private String modID;
     private double weight;
     private ResourceLocation id;
     private Ingredient lens;
@@ -16,29 +15,19 @@ public class MinerEntry {
 
     public MinerEntry() {}
 
-    public MinerEntry(String modID, double weight, Ingredient lens, BlockState state, CompoundNBT data) {
-        this.modID = modID;
+    public MinerEntry(double weight, Ingredient lens, BlockState state, CompoundNBT data) {
         this.weight = weight;
         this.lens = lens;
         this.state = state;
         this.data = data;
     }
 
-    public MinerEntry(String modID, double weight, ResourceLocation id, Ingredient lens, BlockState state, CompoundNBT data) {
-        this.modID = modID;
+    public MinerEntry(double weight, ResourceLocation id, Ingredient lens, BlockState state, CompoundNBT data) {
         this.weight = weight;
         this.id = id;
         this.lens = lens;
         this.state = state;
         this.data = data;
-    }
-
-    public void setModID(String modID) {
-        this.modID = modID;
-    }
-
-    public String getModID() {
-        return modID;
     }
 
     public void setId(ResourceLocation id) {

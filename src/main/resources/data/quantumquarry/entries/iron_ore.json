@@ -1,0 +1,16 @@
+{
+  "conditions": [
+    {
+      "modid": "minecraft",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "weight": 20.0,
+  "lens": {
+    "item": "quantumquarry:brown_lens"
+  },
+  "state": {
+    "block": "minecraft:iron_ore",
+    "properties": {}
+  }
+}

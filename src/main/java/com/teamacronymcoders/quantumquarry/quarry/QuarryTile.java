@@ -70,7 +70,6 @@ public class QuarryTile extends ActiveTile<QuarryTile> {
             .setOnSlotChanged((stack, integer) -> markComponentForUpdate(true))
             .setInputFilter((stack, integer) -> stack.getCapability(CapabilityEnergy.ENERGY).isPresent()));
         energyStorage = new EnergyStorageComponent(QuantumConfig.getMaxPowerStorage(), -100, 0);
-        addProgressBar(progressBar = (ProgressBarComponent) new ProgressBarComponent<>(-80, 0, 1).setOnTickWork(() -> markComponentForUpdate(true)));
     }
 
     @Override
@@ -86,7 +85,6 @@ public class QuarryTile extends ActiveTile<QuarryTile> {
         if (entry != null) {
             ItemStack tool = QuarryHelper.getAppropriateTool(entry.getState(), toolInventory);
             handleQuantumQuarry(entry, lens, tool);
-            handlePowerDrain(lens, tool);
         }
     }
 
@@ -157,9 +155,9 @@ public class QuarryTile extends ActiveTile<QuarryTile> {
     }
 
     public void handleQuantumQuarry(MinerEntry entry, ItemStack lens, ItemStack tool) {
-        if (!hold && QuarryHelper.canToolBreakBlock(entry.getState(), tool) && world != null && !world.isRemote) {
+        if (!hold && QuarryHelper.canToolBreakBlock(entry.getState(), tool) && world != null && !world.isRemote()) {
             for (int i = 0; i < QuarryHelper.getAmountOfOperationsForPower(getCurrentEnergy(), lens, tool); i++) {
-                List<ItemStack> generated = QuarryHelper.getDrops((ServerWorld) world, entry.getState(), lens, tool, null, null);
+                List<ItemStack> generated = QuarryHelper.getDrops(pos, (ServerWorld) world, entry.getState(), lens, tool, null, null);
                 for (ItemStack stack : generated) {
                     if (!ItemHandlerHelper.insertItemStacked(storageInventory, stack, false).isEmpty()) {
                         hold = true;
@@ -172,6 +170,7 @@ public class QuarryTile extends ActiveTile<QuarryTile> {
                 if (QuantumConfig.getShouldToolsTakeDamage()) {
                     tool.attemptDamageItem(1, QuantumQuarry.RANDOM, null);
                 }
+                handlePowerDrain(lens, tool);
             }
         }
     }

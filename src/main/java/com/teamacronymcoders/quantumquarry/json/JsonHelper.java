@@ -1,6 +1,7 @@
 package com.teamacronymcoders.quantumquarry.json;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
@@ -13,21 +14,30 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.IProperty;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.crafting.conditions.ICondition;
+import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 import net.minecraftforge.common.util.JsonUtils;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 public class JsonHelper {
 
-    public static JsonObject serializeMinerEntry(MinerEntry entry) {
+    public static JsonObject serializeMinerEntry(MinerEntry entry, List<ICondition> conditions) {
         JsonObject object = new JsonObject();
-        object.addProperty("modid", entry.getModID());
+        JsonArray array = new JsonArray();
+        for (ICondition condition : conditions) {
+            array.add(CraftingHelper.serialize(condition));
+        }
+        if (array.size() > 0) {
+            object.add("conditions", array);
+        }
         object.addProperty("weight", entry.getWeight());
-        object.addProperty("id", entry.getId().toString());
         object.add("lens", entry.getLens().serialize());
         object.add("state", serializeBlockState(entry.getState()));
         if (entry.getData() != null) {
@@ -37,9 +47,10 @@ public class JsonHelper {
     }
 
     public static MinerEntry deserializeMinerEntry(ResourceLocation resourceLocation, MinerEntry entry, JsonObject object) {
-        entry.setWeight(getDouble(object, "weight"));
+        double weight = getDouble(object, "weight");
         Ingredient lens = Ingredient.deserialize(object.getAsJsonObject("lens"));
         BlockState state = JsonHelper.deserializeBlockState(object.getAsJsonObject("state"));
+        entry.setWeight(weight);
         entry.setId(resourceLocation);
         entry.setLens(lens);
         entry.setState(state);

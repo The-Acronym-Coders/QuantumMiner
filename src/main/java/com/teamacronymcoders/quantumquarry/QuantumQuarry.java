@@ -5,7 +5,6 @@ import com.hrznstudio.titanium.module.ModuleController;
 import com.hrznstudio.titanium.recipe.generator.BlockItemModelGeneratorProvider;
 import com.hrznstudio.titanium.tab.TitaniumTab;
 import com.teamacronymcoders.quantumquarry.datagen.QuantumMinerEntryDataProvider;
-import com.teamacronymcoders.quantumquarry.datagen.extendable.MinerEntryDataProvider;
 import com.teamacronymcoders.quantumquarry.datagen.QuantumTagDataProvider;
 import com.teamacronymcoders.quantumquarry.json.MinerEntryJsonDirector;
 import com.teamacronymcoders.quantumquarry.json.MinerEntryJsonProvider;
@@ -13,6 +12,7 @@ import com.teamacronymcoders.quantumquarry.quarry.QuarryHelper;
 import com.teamacronymcoders.quantumquarry.registry.QuantumQuarryModules;
 import com.teamacronymcoders.quantumquarry.registry.QuantumQuarryRegistryHandler;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -36,8 +36,8 @@ public class QuantumQuarry extends ModuleController {
     public QuantumQuarry() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         QuantumQuarryRegistryHandler.register(eventBus);
-        eventBus.addListener(QuantumQuarry::serverAboutToStart);
-        ModLoadingContext.get().registerConfig(Type.COMMON, QuantumConfig.initialize(), MODID + "/general.toml");
+        MinecraftForge.EVENT_BUS.addListener(QuantumQuarry::serverAboutToStart);
+        ModLoadingContext.get().registerConfig(Type.COMMON, QuantumConfig.initialize(), "quantumquarry.toml");
     }
 
     @Override
@@ -54,7 +54,7 @@ public class QuantumQuarry extends ModuleController {
     }
 
     private static void serverAboutToStart(FMLServerAboutToStartEvent event) {
-        event.getServer().getResourceManager().addReloadListener(new JsonLoader<>(MODID + "/entries", LOGGER, new MinerEntryJsonDirector(QuarryHelper.getEntries()), new MinerEntryJsonProvider()));
+        event.getServer().getResourceManager().addReloadListener(new JsonLoader<>("entries", LOGGER, new MinerEntryJsonDirector(QuarryHelper.getEntries()), new MinerEntryJsonProvider()));
     }
 
 }
