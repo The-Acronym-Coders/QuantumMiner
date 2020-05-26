@@ -1,10 +1,8 @@
 package com.teamacronymcoders.quantumquarry.json;
 
 import com.hrznstudio.titanium.json.jsondirector.IJsonDirector;
-import com.teamacronymcoders.quantumquarry.QuantumQuarry;
 import com.teamacronymcoders.quantumquarry.recipe.MinerEntry;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.ModList;
 
 import java.util.List;
 

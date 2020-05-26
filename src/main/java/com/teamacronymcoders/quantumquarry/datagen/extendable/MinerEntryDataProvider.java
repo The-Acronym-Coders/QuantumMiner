@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.teamacronymcoders.quantumquarry.QuantumQuarry;
+import com.teamacronymcoders.quantumquarry.json.JsonHelper;
 import com.teamacronymcoders.quantumquarry.recipe.MinerEntry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
@@ -32,9 +33,9 @@ public class MinerEntryDataProvider implements IDataProvider {
             if (!set.add(entry.getId())) {
                 throw new IllegalStateException("Duplicate Miner Entry ID " + entry.getId());
             } else {
-                Path path1 = pathIn.resolve("data/" + entry.getId().getNamespace() + "/miningentries/" + entry.getId().getPath() + ".json");
+                Path path1 = pathIn.resolve("data/" + entry.getId().getNamespace() + "/entries/" + entry.getId().getPath() + ".json");
                 try {
-                    IDataProvider.save(GSON, cache, new MinerEntry(entry.getModid(), entry.getWeight(), entry.getId(), entry.getLens(), entry.getState(), entry.getData()).serialize(), path1);
+                    IDataProvider.save(GSON, cache, JsonHelper.serializeMinerEntry(entry), path1);
                 } catch (IOException ioException) {
                     QuantumQuarry.LOGGER.error("Couldn't save miner entry {}", path1, ioException);
                 }

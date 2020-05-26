@@ -21,7 +21,6 @@ public class QuantumTagDataProvider {
 
         @Override
         protected void registerTags() {
-            super.registerTags();
             getBuilder(LensTag).add(
                 QuantumQuarryRegistryHandler.WHITE_LENS.get(),
                 QuantumQuarryRegistryHandler.ORANGE_LENS.get(),

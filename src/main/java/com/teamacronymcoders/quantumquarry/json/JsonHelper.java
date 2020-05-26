@@ -5,11 +5,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.teamacronymcoders.quantumquarry.QuantumQuarry;
+import com.teamacronymcoders.quantumquarry.recipe.MinerEntry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.IProperty;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.JsonUtils;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -18,6 +22,70 @@ import java.util.Map;
 import java.util.Optional;
 
 public class JsonHelper {
+
+    public static JsonObject serializeMinerEntry(MinerEntry entry) {
+        JsonObject object = new JsonObject();
+        object.addProperty("modid", entry.getModID());
+        object.addProperty("weight", entry.getWeight());
+        object.addProperty("id", entry.getId().toString());
+        object.add("lens", entry.getLens().serialize());
+        object.add("state", serializeBlockState(entry.getState()));
+        if (entry.getData() != null) {
+            object.addProperty("data", entry.getData().toString());
+        }
+        return object;
+    }
+
+    public static MinerEntry deserializeMinerEntry(ResourceLocation resourceLocation, MinerEntry entry, JsonObject object) {
+        entry.setWeight(getDouble(object, "weight"));
+        Ingredient lens = Ingredient.deserialize(object.getAsJsonObject("lens"));
+        BlockState state = JsonHelper.deserializeBlockState(object.getAsJsonObject("state"));
+        entry.setId(resourceLocation);
+        entry.setLens(lens);
+        entry.setState(state);
+        if (object.has("data")) {
+            CompoundNBT data = JsonUtils.readNBT(object, "data");
+            entry.setData(data);
+        }
+        return entry;
+    }
+
+    public static MinerEntry deserializeMinerEntry(ResourceLocation resourceLocation, JsonObject object) {
+        MinerEntry entry = new MinerEntry();
+        return deserializeMinerEntry(resourceLocation, entry, object);
+    }
+
+    /**
+     * Gets the float value of the given JsonElement.  Expects the second parameter to be the name of the element's field
+     * if an error message needs to be thrown.
+     */
+    public static double getDouble(JsonElement json, String memberName) {
+        if (json.isJsonPrimitive() && json.getAsJsonPrimitive().isNumber()) {
+            return json.getAsDouble();
+        } else {
+            throw new JsonSyntaxException("Expected " + memberName + " to be a Float, was " + JSONUtils.toString(json));
+        }
+    }
+
+    /**
+     * Gets the float value of the field on the JsonObject with the given name.
+     */
+    public static double getDouble(JsonObject json, String memberName) {
+        if (json.has(memberName)) {
+            return getDouble(json.get(memberName), memberName);
+        } else {
+            throw new JsonSyntaxException("Missing " + memberName + ", expected to find a Float");
+        }
+    }
+
+    /**
+     * Gets the float value of the field on the JsonObject with the given name, or the given default value if the field
+     * is missing.
+     */
+    public static double getDouble(JsonObject json, String memberName, double fallback) {
+        return json.has(memberName) ? getDouble(json.get(memberName), memberName) : fallback;
+    }
+
     /**
      * Credit for the following Methods goes to Darkhax and his library mod Bookshelf <3
      */

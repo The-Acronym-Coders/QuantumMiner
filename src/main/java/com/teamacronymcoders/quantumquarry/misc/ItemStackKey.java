@@ -1,10 +1,12 @@
 package com.teamacronymcoders.quantumquarry.misc;
 
+import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
 
 import java.util.Objects;
 
 public class ItemStackKey {
+
     private final ItemStack itemStack;
 
     public ItemStackKey(ItemStack itemStack) {
@@ -19,4 +21,5 @@ public class ItemStackKey {
     public int hashCode() {
         return Objects.hash(this.itemStack.getItem(), this.itemStack.getTag());
     }
+
 }

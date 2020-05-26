@@ -15,7 +15,7 @@ public class MiningEntryMinecraft {
         consumer.accept(
             new MinerEntry(
                 "minecraft",
-                30d,
+                30D,
                 new ResourceLocation(QuantumQuarry.MODID, "coal_ore"),
                 Ingredient.fromItems(QuantumQuarryRegistryHandler.BLACK_LENS.get()),
                 Blocks.COAL_ORE.getDefaultState(),
@@ -25,7 +25,7 @@ public class MiningEntryMinecraft {
         consumer.accept(
             new MinerEntry(
                 "minecraft",
-                20d,
+                20D,
                 new ResourceLocation(QuantumQuarry.MODID, "iron_ore"),
                 Ingredient.fromItems(QuantumQuarryRegistryHandler.BROWN_LENS.get()),
                 Blocks.IRON_ORE.getDefaultState(),
@@ -35,7 +35,7 @@ public class MiningEntryMinecraft {
         consumer.accept(
             new MinerEntry(
                 "minecraft",
-                13d,
+                13D,
                 new ResourceLocation(QuantumQuarry.MODID, "gold_ore"),
                 Ingredient.fromItems(QuantumQuarryRegistryHandler.YELLOW_LENS.get()),
                 Blocks.GOLD_ORE.getDefaultState(),
@@ -45,7 +45,7 @@ public class MiningEntryMinecraft {
         consumer.accept(
             new MinerEntry(
                 "minecraft",
-                15d,
+                15D,
                 new ResourceLocation(QuantumQuarry.MODID, "redstone_ore"),
                 Ingredient.fromItems(QuantumQuarryRegistryHandler.RED_LENS.get()),
                 Blocks.REDSTONE_ORE.getDefaultState(),
@@ -55,7 +55,7 @@ public class MiningEntryMinecraft {
         consumer.accept(
             new MinerEntry(
                 "minecraft",
-                10d,
+                10D,
                 new ResourceLocation(QuantumQuarry.MODID, "lapis_ore"),
                 Ingredient.fromItems(QuantumQuarryRegistryHandler.BLUE_LENS.get()),
                 Blocks.LAPIS_ORE.getDefaultState(),
@@ -65,7 +65,7 @@ public class MiningEntryMinecraft {
         consumer.accept(
             new MinerEntry(
                 "minecraft",
-                2d,
+                2D,
                 new ResourceLocation(QuantumQuarry.MODID, "diamond_ore"),
                 Ingredient.fromItems(QuantumQuarryRegistryHandler.CYAN_LENS.get()),
                 Blocks.DIAMOND_ORE.getDefaultState(),
@@ -75,7 +75,7 @@ public class MiningEntryMinecraft {
         consumer.accept(
             new MinerEntry(
                 "minecraft",
-                10d,
+                10D,
                 new ResourceLocation(QuantumQuarry.MODID, "quartz_ore"),
                 Ingredient.fromItems(QuantumQuarryRegistryHandler.WHITE_LENS.get()),
                 Blocks.NETHER_QUARTZ_ORE.getDefaultState(),

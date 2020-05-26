@@ -4,6 +4,7 @@ import com.hrznstudio.titanium.json.JsonLoader;
 import com.hrznstudio.titanium.module.ModuleController;
 import com.hrznstudio.titanium.recipe.generator.BlockItemModelGeneratorProvider;
 import com.hrznstudio.titanium.tab.TitaniumTab;
+import com.teamacronymcoders.quantumquarry.datagen.QuantumMinerEntryDataProvider;
 import com.teamacronymcoders.quantumquarry.datagen.extendable.MinerEntryDataProvider;
 import com.teamacronymcoders.quantumquarry.datagen.QuantumTagDataProvider;
 import com.teamacronymcoders.quantumquarry.json.MinerEntryJsonDirector;
@@ -41,9 +42,10 @@ public class QuantumQuarry extends ModuleController {
 
     @Override
     public void addDataProvider(GatherDataEvent event) {
-        new MinerEntryDataProvider(event.getGenerator());
-        new BlockItemModelGeneratorProvider(event.getGenerator(), MODID);
-        new QuantumTagDataProvider.ItemTags(event.getGenerator());
+        super.addDataProvider(event);
+        event.getGenerator().addProvider(new QuantumMinerEntryDataProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new BlockItemModelGeneratorProvider(event.getGenerator(), MODID));
+        event.getGenerator().addProvider(new QuantumTagDataProvider.ItemTags(event.getGenerator()));
     }
 
     @Override
