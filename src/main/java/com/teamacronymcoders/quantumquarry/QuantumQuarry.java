@@ -6,9 +6,9 @@ import com.hrznstudio.titanium.recipe.generator.BlockItemModelGeneratorProvider;
 import com.hrznstudio.titanium.tab.TitaniumTab;
 import com.teamacronymcoders.quantumquarry.datagen.extendable.MinerEntryDataProvider;
 import com.teamacronymcoders.quantumquarry.datagen.QuantumTagDataProvider;
-import com.teamacronymcoders.quantumquarry.recipe.EntryHelper;
 import com.teamacronymcoders.quantumquarry.json.MinerEntryJsonDirector;
 import com.teamacronymcoders.quantumquarry.json.MinerEntryJsonProvider;
+import com.teamacronymcoders.quantumquarry.quarry.QuarryHelper;
 import com.teamacronymcoders.quantumquarry.registry.QuantumQuarryModules;
 import com.teamacronymcoders.quantumquarry.registry.QuantumQuarryRegistryHandler;
 import net.minecraft.item.ItemStack;
@@ -52,7 +52,7 @@ public class QuantumQuarry extends ModuleController {
     }
 
     private static void serverAboutToStart(FMLServerAboutToStartEvent event) {
-        event.getServer().getResourceManager().addReloadListener(new JsonLoader<>(MODID + "/entries", LOGGER, new MinerEntryJsonDirector(EntryHelper.getEntries()), new MinerEntryJsonProvider()));
+        event.getServer().getResourceManager().addReloadListener(new JsonLoader<>(MODID + "/entries", LOGGER, new MinerEntryJsonDirector(QuarryHelper.getEntries()), new MinerEntryJsonProvider()));
     }
 
 }

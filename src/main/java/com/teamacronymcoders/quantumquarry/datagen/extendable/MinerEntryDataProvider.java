@@ -34,7 +34,7 @@ public class MinerEntryDataProvider implements IDataProvider {
             } else {
                 Path path1 = pathIn.resolve("data/" + entry.getId().getNamespace() + "/miningentries/" + entry.getId().getPath() + ".json");
                 try {
-                    IDataProvider.save(GSON, cache, new MinerEntry(entry.getModid(), entry.getId(), entry.getLens(), entry.getState(), entry.getData()).serialize(), path1);
+                    IDataProvider.save(GSON, cache, new MinerEntry(entry.getModid(), entry.getWeight(), entry.getId(), entry.getLens(), entry.getState(), entry.getData()).serialize(), path1);
                 } catch (IOException ioException) {
                     QuantumQuarry.LOGGER.error("Couldn't save miner entry {}", path1, ioException);
                 }

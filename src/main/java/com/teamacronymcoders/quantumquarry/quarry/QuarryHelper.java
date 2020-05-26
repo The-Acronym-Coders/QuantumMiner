@@ -2,7 +2,9 @@ package com.teamacronymcoders.quantumquarry.quarry;
 
 import com.hrznstudio.titanium.component.inventory.SidedInventoryComponent;
 import com.teamacronymcoders.quantumquarry.QuantumConfig;
-import com.teamacronymcoders.quantumquarry.recipe.EntryHelper;
+import com.teamacronymcoders.quantumquarry.QuantumQuarry;
+import com.teamacronymcoders.quantumquarry.misc.ItemStackKey;
+import com.teamacronymcoders.quantumquarry.misc.RandomCollection;
 import com.teamacronymcoders.quantumquarry.recipe.MinerEntry;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -19,10 +21,18 @@ import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class QuarryHelper {
+
+    private static final List<MinerEntry> ENTRIES = new ArrayList<>();
+    private static Map<ItemStackKey, RandomCollection<MinerEntry>> cachedMaps = new HashMap<>();
 
     /**
      * @param powerIn Power Stored in the Quarry
@@ -119,13 +129,22 @@ public class QuarryHelper {
         return false;
     }
 
-    public static List<MinerEntry> getMinerEntriesByLens(ItemStack lens) {
-        if (lens.isEmpty()) {
-            return EntryHelper.getEntries();
+    public static RandomCollection<MinerEntry> getMinerEntriesByLens(ItemStack lens) {
+        ItemStackKey key = new ItemStackKey(lens);
+        Predicate<MinerEntry> filter = (lens.isEmpty()) ? entry -> true : entry -> entry.getLens().test(lens);
+        if (cachedMaps.containsKey(key)) {
+            return cachedMaps.get(key);
         }
-        return EntryHelper.getEntries().stream()
-            .filter(entry -> entry.getLens().test(lens))
-            .collect(Collectors.toList());
+        List<MinerEntry> entries = ENTRIES.stream().filter(filter).collect(Collectors.toList());
+        RandomCollection<MinerEntry> collection = new RandomCollection<>(QuantumQuarry.RANDOM);
+        for (MinerEntry entry : entries) {
+            collection.add(entry.getWeight(), entry);
+        }
+        cachedMaps.put(key, collection);
+        return collection;
     }
 
+    public static List<MinerEntry> getEntries() {
+        return ENTRIES;
+    }
 }

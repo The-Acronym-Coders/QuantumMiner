@@ -10,7 +10,7 @@ import com.hrznstudio.titanium.container.addon.IContainerAddon;
 import com.teamacronymcoders.quantumquarry.QuantumConfig;
 import com.teamacronymcoders.quantumquarry.QuantumQuarry;
 import com.teamacronymcoders.quantumquarry.datagen.QuantumTagDataProvider.ItemTags;
-import com.teamacronymcoders.quantumquarry.recipe.EntryHelper;
+import com.teamacronymcoders.quantumquarry.misc.RandomCollection;
 import com.teamacronymcoders.quantumquarry.recipe.MinerEntry;
 import com.teamacronymcoders.quantumquarry.registry.QuantumQuarryRegistryHandler;
 import net.minecraft.item.DyeColor;
@@ -40,7 +40,7 @@ public class QuarryTile extends ActiveTile<QuarryTile> {
 
     private final LazyOptional<IEnergyStorage> energyCap = LazyOptional.of(() -> energyStorage);
 
-    private List<MinerEntry> cachedEntries;
+    private RandomCollection<MinerEntry> cachedEntries;
 
     private boolean hold = false;
 
@@ -77,6 +77,7 @@ public class QuarryTile extends ActiveTile<QuarryTile> {
     public void tick() {
         // Don't Remove super.tick();
         super.tick();
+        handleEnergySlot();
         if (cachedEntries == null) {
             cachedEntries = getRecipesForCache(ItemStack.EMPTY);
         }
@@ -132,16 +133,27 @@ public class QuarryTile extends ActiveTile<QuarryTile> {
         return energyStorage.getEnergyStored();
     }
 
-    public List<MinerEntry> getRecipesForCache(ItemStack lens) {
-        if (lens.isEmpty()) return EntryHelper.getEntries();
+    public RandomCollection<MinerEntry> getRecipesForCache(ItemStack lens) {
         return QuarryHelper.getMinerEntriesByLens(lens);
     }
 
     public MinerEntry getRandomCachedEntry() {
         if (cachedEntries != null && !cachedEntries.isEmpty()) {
-            return cachedEntries.stream().skip(QuantumQuarry.RANDOM.nextInt(cachedEntries.size())).findFirst().orElse(null);
+            return cachedEntries.next();
         }
         return null;
+    }
+
+    public void handleEnergySlot() {
+        if (!energyInventory.getStackInSlot(0).isEmpty()) {
+            ItemStack stack = energyInventory.getStackInSlot(0);
+            stack.getCapability(CapabilityEnergy.ENERGY).ifPresent(iEnergyStorage -> {
+                int charged = energyStorage.receiveEnergy(iEnergyStorage.getEnergyStored(), false);
+                if(charged > 0) {
+                    energyStorage.extractEnergy(charged, false);
+                }
+            });
+        }
     }
 
     public void handleQuantumQuarry(MinerEntry entry, ItemStack lens, ItemStack tool) {

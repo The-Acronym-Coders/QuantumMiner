@@ -24,11 +24,11 @@ public class MinerEntryJsonProvider implements IJsonProvider<MinerEntry> {
                 }
             }
         }
-        if (jsonObject.has("id") && jsonObject.has("lens") && jsonObject.has("state")) {
+        if (jsonObject.has("id") && jsonObject.has("weight") && jsonObject.has("lens") && jsonObject.has("state")) {
             entry.deserialize(jsonObject);
             return entry;
         }
-        QuantumQuarry.LOGGER.error("Mining Entry with ID: {}, Did not have one of the following fields: 'id', 'lens' or 'state'", resourceLocation.toString());
+        QuantumQuarry.LOGGER.error("Mining Entry with ID: {}, Did not have one of the following fields: 'id', 'weight', 'lens' or 'state'", resourceLocation.toString());
         return null;
     }
 }

@@ -11,6 +11,7 @@ import net.minecraftforge.common.util.JsonUtils;
 public class MinerEntry {
 
     private String modid;
+    private double weight;
     private ResourceLocation id;
     private Ingredient lens;
     private BlockState state;
@@ -18,14 +19,14 @@ public class MinerEntry {
 
     public MinerEntry() {}
 
-    public MinerEntry(String modid, Ingredient lens, BlockState state, CompoundNBT data) {
+    public MinerEntry(String modid, double weight, Ingredient lens, BlockState state, CompoundNBT data) {
         this.modid = modid;
         this.lens = lens;
         this.state = state;
         this.data = data;
     }
 
-    public MinerEntry(String modid, ResourceLocation id, Ingredient lens, BlockState state, CompoundNBT data) {
+    public MinerEntry(String modid, double weight, ResourceLocation id, Ingredient lens, BlockState state, CompoundNBT data) {
         this.modid = modid;
         this.id = id;
         this.lens = lens;
@@ -47,6 +48,14 @@ public class MinerEntry {
 
     public ResourceLocation getId() {
         return id;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public double getWeight() {
+        return weight;
     }
 
     public MinerEntry setLens(Ingredient lens) {
