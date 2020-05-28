@@ -23,10 +23,10 @@ public class QuantumConfig {
     public QuantumConfig(ForgeConfigSpec.Builder builder) {
         builder.push("General");
         shouldToolsTakeDamage = builder.comment("Should tools take damage").define("shouldToolsTakeDamage", false);
-        baseCost = builder.comment("Base Energy Cost per Operation").defineInRange("baseCost", 2000, 1, Integer.MAX_VALUE);
-        efficiencyReduction = builder.comment("Amount of Power Reduced per Level of Efficiency").defineInRange("efficiencyReduction", 200, 1, Integer.MAX_VALUE);
-        minimumPowerDrain = builder.comment("Minimum amount of power drained each operation").defineInRange("minimumPowerDrain", 200, 1, Integer.MAX_VALUE);
-        maxPowerStorage = builder.comment("Maximum Capacity Power Storage of the Quarry").defineInRange("maxPowerStorage", 1600000, 1, Integer.MAX_VALUE);
+        baseCost = builder.comment("Base Energy Cost per Operation").defineInRange("baseCost", 100000, 1, Integer.MAX_VALUE);
+        efficiencyReduction = builder.comment("Amount of Power Reduced per Level of Efficiency").defineInRange("efficiencyReduction", 2500, 1, Integer.MAX_VALUE);
+        minimumPowerDrain = builder.comment("Minimum amount of power drained each operation").defineInRange("minimumPowerDrain", 25000, 1, Integer.MAX_VALUE);
+        maxPowerStorage = builder.comment("Maximum Capacity Power Storage of the Quarry").defineInRange("maxPowerStorage", 8000000, 1, Integer.MAX_VALUE);
         shouldDoDetailedJsonLogging = builder.comment("Should the mod print more detailed errors related to JSON loading?").define("shouldDoDetailedJsonLogging", false);
         shouldAirExistInTheQuarryPool = builder.comment("Should 'Air' exist as a valid entry in the quarry pool").define("shouldAirExistInTheQuarryPool", false);
         airWeightedValue = builder.comment("The Weighted Value for Air existing in the Quarry Pool [Requires 'shouldAirExistInTheQuarryPool' to be true]").defineInRange("airWeightedValue", 50, 0, Integer.MAX_VALUE);

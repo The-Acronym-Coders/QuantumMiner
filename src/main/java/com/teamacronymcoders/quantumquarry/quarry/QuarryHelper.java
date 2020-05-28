@@ -1,11 +1,13 @@
 package com.teamacronymcoders.quantumquarry.quarry;
 
+import com.hrznstudio.titanium.component.inventory.InventoryComponent;
 import com.hrznstudio.titanium.component.inventory.SidedInventoryComponent;
 import com.teamacronymcoders.quantumquarry.QuantumConfig;
 import com.teamacronymcoders.quantumquarry.QuantumQuarry;
 import com.teamacronymcoders.quantumquarry.recipe.ItemStackKey;
 import com.teamacronymcoders.quantumquarry.recipe.MinerEntry;
 import net.minecraft.block.BlockState;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,27 +41,51 @@ public class QuarryHelper {
      * @param tool Stored Appropriate Tool for breaking the blockstate.
      * @return returns the amount of operations that can be completed with the current power amount.
      */
-    public static int getAmountOfOperationsForPower(int powerIn, ItemStack lens, ItemStack tool) {
-        int powerPerOperation = getPowerPerOperationWithEfficiency(lens, tool);
-        return doesNotHaveClashingEnchantments(lens, tool) ? Math.round((float) powerIn / powerPerOperation) : 0;
+    public static int getAmountOfOperationsForPower(int powerIn, ItemStack lens, int totalEfficiencyFromTools) {
+        int powerPerOperation = getPowerPerOperationWithEfficiency(lens, totalEfficiencyFromTools);
+        return Math.round((float) powerIn / powerPerOperation);
     }
 
     /**
      * @param lens Stored Lens
-     * @param tool Stored Appropriate Tool
+     * @param totalEfficiencyFromTools Total Efficiency Level from All Tools
      * @return Returns the default cost minus the efficiency modifier
      */
-    public static int getPowerPerOperationWithEfficiency(ItemStack lens, ItemStack tool) {
-        int efficiency = EnchantmentHelper.getEnchantmentLevel(Enchantments.EFFICIENCY, lens) + EnchantmentHelper.getEnchantmentLevel(Enchantments.EFFICIENCY, tool);
+    public static int getPowerPerOperationWithEfficiency(ItemStack lens, int totalEfficiencyFromTools) {
+        int efficiency = EnchantmentHelper.getEnchantmentLevel(Enchantments.EFFICIENCY, lens) + totalEfficiencyFromTools;
         return Math.max(QuantumConfig.getBaseCost() - (QuantumConfig.getEfficiencyReduction() * efficiency), QuantumConfig.getMinimumPowerDrain());
     }
 
-    private static boolean doesNotHaveClashingEnchantments(ItemStack lens, ItemStack tool) {
-        boolean hasFortuneLens = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, lens) > 0;
-        boolean hasSilkTouchLens = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, lens) > 0;
-        boolean hasFortuneTool = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, tool) > 0;
-        boolean hasSilkTouchTool = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0;
-        return !(hasFortuneLens && hasSilkTouchTool) || !(hasSilkTouchLens && hasFortuneTool);
+    public static boolean doesNotHaveClashingEnchantmentsTool(ItemStack stack, InventoryComponent component) {
+        boolean hasFortuneInsert = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack) > 0;
+        boolean hasSilkTouchInsert = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0;
+        if (hasFortuneInsert) {
+            for (int i = 0; i < 2; i++) {
+                boolean hasSilkTouch = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, component.getStackInSlot(i)) > 0;
+                if (hasSilkTouch) return false;
+            }
+        }
+        if (hasSilkTouchInsert) {
+            for (int i = 0; i < 2; i++) {
+                boolean hasFortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, component.getStackInSlot(i)) > 0;
+                if (hasFortune) return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean doesNotHaveClashingEnchantments(ItemStack lens, ItemStack tool) {
+        Map<Enchantment, Integer> enchantmentsLens = EnchantmentHelper.getEnchantments(lens);
+        Map<Enchantment, Integer> enchantmentsTool = EnchantmentHelper.getEnchantments(tool);
+        boolean canInsert = true;
+        for (Enchantment enchantment : enchantmentsTool.keySet()) {
+            for (Enchantment enchantment1 : enchantmentsLens.keySet()) {
+                if (!enchantment.equals(enchantment1)) {
+                    canInsert = enchantment.isCompatibleWith(enchantment1);
+                }
+            }
+        }
+        return canInsert;
     }
 
     /**
@@ -68,10 +94,9 @@ public class QuarryHelper {
      * @param lens Stored Lens
      * @param tool Stored Appropriate Tool for "breaking" the block
      * @param playerEntity Nullable Player
-     * @param compoundNBT Nullable NBT for Tile-Entity Ores
      * @return List of ItemStack Drops generated from LootTables
      */
-    public static List<ItemStack> getDrops(@Nonnull BlockPos pos, @Nonnull ServerWorld world, @Nonnull BlockState state, @Nullable ItemStack lens, @Nonnull ItemStack tool, @Nullable PlayerEntity playerEntity, @Nullable CompoundNBT compoundNBT) {
+    public static List<ItemStack> getDrops(@Nonnull BlockPos pos, @Nonnull ServerWorld world, @Nonnull BlockState state, @Nullable ItemStack lens, @Nonnull ItemStack tool, @Nullable PlayerEntity playerEntity) {
         Builder context = new Builder(world)
             .withParameter(LootParameters.BLOCK_STATE, state)
             .withParameter(LootParameters.TOOL, tool)
@@ -82,23 +107,7 @@ public class QuarryHelper {
         if (playerEntity != null) {
             context.withParameter(LootParameters.THIS_ENTITY, playerEntity);
         }
-        if (compoundNBT != null) {
-            TileEntity tileEntity = createTileEntityWithData(world, state, compoundNBT);
-            if (tileEntity != null) {
-                context.withParameter(LootParameters.BLOCK_ENTITY, tileEntity);
-                return state.getDrops(context);
-            }
-        }
         return state.getDrops(context);
-    }
-
-    private static TileEntity createTileEntityWithData(IBlockReader reader, BlockState state, CompoundNBT nbt) {
-        TileEntity tileEntity = state.createTileEntity(reader);
-        if (tileEntity != null) {
-            tileEntity.read(nbt);
-            return tileEntity;
-        }
-        return null;
     }
 
     /**
@@ -106,7 +115,7 @@ public class QuarryHelper {
      * @param toolInventory Tool-Inventory
      * @return Returns the appropriate tool to use to break the tool.
      */
-    public static ItemStack getAppropriateTool(BlockState state, SidedInventoryComponent toolInventory) {
+    public static ItemStack getAppropriateTool(BlockState state, SidedInventoryComponent<QuarryTile> toolInventory) {
         if (state.getHarvestTool() != null) {
             switch (state.getHarvestTool().getName()) {
                 case "axe": return toolInventory.getStackInSlot(0);

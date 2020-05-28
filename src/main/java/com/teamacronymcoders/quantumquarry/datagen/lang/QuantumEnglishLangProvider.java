@@ -11,9 +11,9 @@ public class QuantumEnglishLangProvider extends QuantumBaseLangProvider {
 
     @Override
     protected void addTranslations() {
-        add("itemGroup.quantum_quarry", "Quantum Quarry");
         addBlocks();
         addItems();
+        addLocalization();
     }
 
     private void addBlocks() {
@@ -23,6 +23,9 @@ public class QuantumEnglishLangProvider extends QuantumBaseLangProvider {
     private void addItems() {
         // Plastic Hammer
         add(QuantumQuarryRegistryHandler.PLASTIC_HAMMER.get(), "Plastic Hammer");
+
+        // Player Card
+        add(QuantumQuarryRegistryHandler.PLAYER_CARD.get(), "Player Card");
 
         // Lenses
         add(QuantumQuarryRegistryHandler.WHITE_LENS.get(), "White Focusing Lens");
@@ -41,6 +44,16 @@ public class QuantumEnglishLangProvider extends QuantumBaseLangProvider {
         add(QuantumQuarryRegistryHandler.GREEN_LENS.get(), "Green Focusing Lens");
         add(QuantumQuarryRegistryHandler.RED_LENS.get(), "Red Focusing Lens");
         add(QuantumQuarryRegistryHandler.BLACK_LENS.get(), "Black Focusing Lens");
+    }
+
+    private void addLocalization() {
+        add("itemGroup.quantum_quarry", "Quantum Quarry");
+        add("tooltip.playercard.id", "Player with ID: %s");
+        add("tooltip.titanium.facing_handler.tool_inventory", "Tools");
+        add("tooltip.titanium.facing_handler.lens_inventory", "Lens");
+        add("tooltip.titanium.facing_handler.storage_inventory", "Storage");
+        add("tooltip.titanium.facing_handler.energy_inventory", "Power Slot");
+        add("tooltip.titanium.facing_handler.card_inventory", "Player Card");
     }
 
 }

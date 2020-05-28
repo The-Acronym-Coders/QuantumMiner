@@ -4,6 +4,7 @@ import com.hrznstudio.titanium.registry.BlockRegistryObjectGroup;
 import com.teamacronymcoders.quantumquarry.QuantumQuarry;
 import com.teamacronymcoders.quantumquarry.item.ColoredLensItem;
 import com.teamacronymcoders.quantumquarry.item.PlasticHammerItem;
+import com.teamacronymcoders.quantumquarry.item.PlayerCardItem;
 import com.teamacronymcoders.quantumquarry.quarry.QuarryBlock;
 import com.teamacronymcoders.quantumquarry.quarry.QuarryTile;
 import net.minecraft.block.Block;
@@ -29,6 +30,9 @@ public class QuantumQuarryRegistryHandler {
 
     // Plastic Hammer
     public static final RegistryObject<PlasticHammerItem> PLASTIC_HAMMER = ITEM.register("plastic_hammer", PlasticHammerItem::new);
+
+    // Player Card
+    public static final RegistryObject<PlayerCardItem> PLAYER_CARD = ITEM.register("player_card", PlayerCardItem::new);
 
     // Lens Items
     public static final RegistryObject<ColoredLensItem> WHITE_LENS = ITEM.register("white_lens", () -> new ColoredLensItem(DyeColor.WHITE));

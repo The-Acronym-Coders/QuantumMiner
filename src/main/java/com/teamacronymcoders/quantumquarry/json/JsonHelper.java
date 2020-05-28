@@ -43,20 +43,11 @@ public class JsonHelper {
         return object;
     }
 
-    public static MinerEntry deserializeMinerEntry(ResourceLocation resourceLocation, MinerEntry entry, JsonObject object) {
+    public static MinerEntry deserializeMinerEntry(ResourceLocation resourceLocation, JsonObject object) {
         int weight = JSONUtils.getInt(object, "weight");
         Ingredient lens = Ingredient.deserialize(object.getAsJsonObject("lens"));
         Block block = getBlock(object, "block");
-        entry.setWeight(weight);
-        entry.setId(resourceLocation);
-        entry.setLens(lens);
-        entry.setBlock(block);
-        return entry;
-    }
-
-    public static MinerEntry deserializeMinerEntry(ResourceLocation resourceLocation, JsonObject object) {
-        MinerEntry entry = new MinerEntry();
-        return deserializeMinerEntry(resourceLocation, entry, object);
+        return new MinerEntry(weight, resourceLocation, lens, block);
     }
 
     /**

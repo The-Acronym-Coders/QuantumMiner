@@ -13,9 +13,16 @@
   "item.quantumquarry.orange_lens": "Orange Focusing Lens",
   "item.quantumquarry.pink_lens": "Pink Focusing Lens",
   "item.quantumquarry.plastic_hammer": "Plastic Hammer",
+  "item.quantumquarry.player_card": "Player Card",
   "item.quantumquarry.purple_lens": "Purple Focusing Lens",
   "item.quantumquarry.red_lens": "Red Focusing Lens",
   "item.quantumquarry.white_lens": "White Focusing Lens",
   "item.quantumquarry.yellow_lens": "Yellow Focusing Lens",
-  "itemGroup.quantum_quarry": "Quantum Quarry"
+  "itemGroup.quantum_quarry": "Quantum Quarry",
+  "tooltip.playercard.id": "Player with ID: %s",
+  "tooltip.titanium.facing_handler.card_inventory": "Player Card",
+  "tooltip.titanium.facing_handler.energy_inventory": "Power Slot",
+  "tooltip.titanium.facing_handler.lens_inventory": "Lens",
+  "tooltip.titanium.facing_handler.storage_inventory": "Storage",
+  "tooltip.titanium.facing_handler.tool_inventory": "Tools"
 }

@@ -1,8 +1,11 @@
 package com.teamacronymcoders.quantumquarry.recipe;
 
+import mekanism.api.annotations.NonNull;
 import net.minecraft.block.Block;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
 
 public class MinerEntry {
 
@@ -10,8 +13,6 @@ public class MinerEntry {
     private ResourceLocation id;
     private Ingredient lens;
     private Block block;
-
-    public MinerEntry() {}
 
     public MinerEntry(int weight, Ingredient lens, Block block) {
         this.weight = weight;
