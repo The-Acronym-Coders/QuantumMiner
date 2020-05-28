@@ -1,0 +1,13 @@
+{
+  "conditions": [
+    {
+      "modid": "minecraft",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "weight": 10,
+  "lens": {
+    "item": "quantumquarry:blue_lens"
+  },
+  "block": "minecraft:lapis_ore"
+}

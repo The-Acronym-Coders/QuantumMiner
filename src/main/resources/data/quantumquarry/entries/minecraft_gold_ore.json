@@ -1,0 +1,13 @@
+{
+  "conditions": [
+    {
+      "modid": "miencraft",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "weight": 13,
+  "lens": {
+    "item": "quantumquarry:yellow_lens"
+  },
+  "block": "minecraft:gold_ore"
+}

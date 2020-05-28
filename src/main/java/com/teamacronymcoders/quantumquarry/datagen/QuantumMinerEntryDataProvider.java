@@ -1,6 +1,6 @@
 package com.teamacronymcoders.quantumquarry.datagen;
 
-import com.teamacronymcoders.quantumquarry.compat.MiningEntryMinecraft;
+import com.teamacronymcoders.quantumquarry.compat.*;
 import com.teamacronymcoders.quantumquarry.datagen.extendable.MinerEntryDataProvider;
 import com.teamacronymcoders.quantumquarry.recipe.DatagenMinerEntry;
 import net.minecraft.data.DataGenerator;
@@ -15,7 +15,13 @@ public class QuantumMinerEntryDataProvider extends MinerEntryDataProvider{
 
     @Override
     protected void addMinerEntries(Consumer<DatagenMinerEntry> consumer) {
-        MiningEntryMinecraft.addMinecraftOres(consumer);
+        new CompatMiningEntriesMinecraft(consumer);
+        new CompatMiningEntriesMekanism(consumer);
+        new CompatMiningEntriesMysticalAgriculture(consumer);
+        new CompatMiningEntriesPowah(consumer);
+        new CompatMiningEntriesSilentsGems(consumer);
+        new CompatMiningEntriesSilentsMechanisms(consumer);
+        new CompatMiningEntriesWTBW(consumer);
     }
 
     @Override

@@ -1,16 +1,19 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
+        maven {url "https://plugins.gradle.org/m2/"}
         jcenter()
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath "com.wynprice.cursemaven:CurseMaven:2.1.1"
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: "java"
 apply plugin: "idea"
+apply plugin: "com.wynprice.cursemaven"
 
 version = "${minecraft_version}-" + "${version}"
 group = "${group}"
@@ -19,7 +22,7 @@ archivesBaseName = "${archive}"
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    mappings channel: 'snapshot', version: '20200503-1.15.1'
+    mappings channel: 'snapshot', version: "${mappings_version}"
     runs {
         client {
             workingDirectory project.file('run')
@@ -56,6 +59,9 @@ repositories {
     maven {
         url 'https://dvs1.progwml6.com/files/maven'
     }
+    maven {
+        url "https://minecraft.curseforge.com/api/maven/"
+    }
 }
 
 dependencies {
@@ -64,6 +70,27 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
     // at runtime, use the full JEI jar
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+
+    // For Mod Compats
+    // Mekanism
+    compile fg.deobf("curse.maven:mekanism:2958427")
+
+    // Mystical Agriculture
+    compile fg.deobf("curse.maven:cucumber:2965044")
+    compile fg.deobf("curse.maven:mystical-agriculture:2959440")
+
+    // WTBW
+    compile fg.deobf("curse.maven:wtbw_lib:2950461")
+    compile fg.deobf("curse.maven:wtbw_core:2950464")
+
+    // Powah
+    compile fg.deobf("curse.maven:lollipop:2941403")
+    compile fg.deobf("curse.maven:powah:2941416")
+
+    // Silent's Mods
+    compile fg.deobf("curse.maven:silent-lib:2946599")
+    compile fg.deobf("curse.maven:silents-mechanisms:2948946")
+    compile fg.deobf("curse.maven:silents-gems:2961883")
 }
 
 jar {

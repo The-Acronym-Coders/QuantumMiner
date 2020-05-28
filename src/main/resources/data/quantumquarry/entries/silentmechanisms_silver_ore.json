@@ -1,0 +1,13 @@
+{
+  "conditions": [
+    {
+      "modid": "silents_mechanisms",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "weight": 30,
+  "lens": {
+    "item": "quantumquarry:light_gray_lens"
+  },
+  "block": "silents_mechanisms:silver_ore"
+}

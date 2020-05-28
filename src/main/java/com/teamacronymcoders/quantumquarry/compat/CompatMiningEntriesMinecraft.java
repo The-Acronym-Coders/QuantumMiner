@@ -11,17 +11,21 @@ import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 
 import java.util.function.Consumer;
 
-public class MiningEntryMinecraft {
+public class CompatMiningEntriesMinecraft extends DefaultCompatMiningEntries {
 
-    public static void addMinecraftOres(Consumer<DatagenMinerEntry> consumer) {
+    public CompatMiningEntriesMinecraft(Consumer<DatagenMinerEntry> consumer) {
+        super(consumer);
+    }
+
+    @Override
+    public void addOres(Consumer<DatagenMinerEntry> consumer) {
         consumer.accept(
             new DatagenMinerEntry(
                 new MinerEntry(
-                    30D,
-                    new ResourceLocation(QuantumQuarry.MODID, "coal_ore"),
+                    30,
+                    new ResourceLocation(QuantumQuarry.MODID, "minecraft_coal_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.BLACK_LENS.get()),
-                    Blocks.COAL_ORE.getDefaultState(),
-                    null
+                    Blocks.COAL_ORE
                 ),
                 new ModLoadedCondition("minecraft")
             )
@@ -29,11 +33,10 @@ public class MiningEntryMinecraft {
         consumer.accept(
             new DatagenMinerEntry(
                 new MinerEntry(
-                    20D,
-                    new ResourceLocation(QuantumQuarry.MODID, "iron_ore"),
+                    20,
+                    new ResourceLocation(QuantumQuarry.MODID, "minecraft_iron_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.BROWN_LENS.get()),
-                    Blocks.IRON_ORE.getDefaultState(),
-                    null
+                    Blocks.IRON_ORE
                 ),
                 new ModLoadedCondition("minecraft")
             )
@@ -41,11 +44,10 @@ public class MiningEntryMinecraft {
         consumer.accept(
             new DatagenMinerEntry(
                 new MinerEntry(
-                    13D,
-                    new ResourceLocation(QuantumQuarry.MODID, "gold_ore"),
+                    13,
+                    new ResourceLocation(QuantumQuarry.MODID, "minecraft_gold_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.YELLOW_LENS.get()),
-                    Blocks.GOLD_ORE.getDefaultState(),
-                    null
+                    Blocks.GOLD_ORE
                 ),
                 new ModLoadedCondition("miencraft")
             )
@@ -54,11 +56,10 @@ public class MiningEntryMinecraft {
         consumer.accept(
             new DatagenMinerEntry(
                 new MinerEntry(
-                    15D,
-                    new ResourceLocation(QuantumQuarry.MODID, "redstone_ore"),
+                    15,
+                    new ResourceLocation(QuantumQuarry.MODID, "minecraft_redstone_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.RED_LENS.get()),
-                    Blocks.REDSTONE_ORE.getDefaultState(),
-                    null
+                    Blocks.REDSTONE_ORE
                 ),
                 new ModLoadedCondition("minecraft")
             )
@@ -66,11 +67,10 @@ public class MiningEntryMinecraft {
         consumer.accept(
             new DatagenMinerEntry(
                 new MinerEntry(
-                    10D,
-                    new ResourceLocation(QuantumQuarry.MODID, "lapis_ore"),
+                    10,
+                    new ResourceLocation(QuantumQuarry.MODID, "minecraft_lapis_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.BLUE_LENS.get()),
-                    Blocks.LAPIS_ORE.getDefaultState(),
-                    null
+                    Blocks.LAPIS_ORE
                 ),
                 new ModLoadedCondition("minecraft")
             )
@@ -78,11 +78,10 @@ public class MiningEntryMinecraft {
         consumer.accept(
             new DatagenMinerEntry(
                 new MinerEntry(
-                    2D,
-                    new ResourceLocation(QuantumQuarry.MODID, "diamond_ore"),
+                    2,
+                    new ResourceLocation(QuantumQuarry.MODID, "minecraft_diamond_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.CYAN_LENS.get()),
-                    Blocks.DIAMOND_ORE.getDefaultState(),
-                    null
+                    Blocks.DIAMOND_ORE
                 ),
                 new ModLoadedCondition("minecraft")
             )
@@ -90,11 +89,10 @@ public class MiningEntryMinecraft {
         consumer.accept(
             new DatagenMinerEntry(
                 new MinerEntry(
-                    10D,
-                    new ResourceLocation(QuantumQuarry.MODID, "quartz_ore"),
+                    10,
+                    new ResourceLocation(QuantumQuarry.MODID, "minecraft_quartz_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.WHITE_LENS.get()),
-                    Blocks.NETHER_QUARTZ_ORE.getDefaultState(),
-                    null
+                    Blocks.NETHER_QUARTZ_ORE
                 ),
                 new ModLoadedCondition("minecraft")
             )

@@ -1,0 +1,13 @@
+{
+  "conditions": [
+    {
+      "modid": "mysticalagriculture",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "weight": 10,
+  "lens": {
+    "item": "quantumquarry:orange_lens"
+  },
+  "block": "mysticalagriculture:inferium_ore"
+}

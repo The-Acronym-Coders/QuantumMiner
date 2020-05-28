@@ -1,0 +1,13 @@
+{
+  "conditions": [
+    {
+      "modid": "wtbw_core",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "weight": 30,
+  "lens": {
+    "item": "quantumquarry:orange_lens"
+  },
+  "block": "wtbw_core:copper_ore"
+}

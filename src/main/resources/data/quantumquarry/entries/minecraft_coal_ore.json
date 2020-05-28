@@ -1,0 +1,13 @@
+{
+  "conditions": [
+    {
+      "modid": "minecraft",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "weight": 30,
+  "lens": {
+    "item": "quantumquarry:black_lens"
+  },
+  "block": "minecraft:coal_ore"
+}

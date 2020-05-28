@@ -1,0 +1,13 @@
+{
+  "conditions": [
+    {
+      "modid": "mysticalagriculture",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "weight": 5,
+  "lens": {
+    "item": "quantumquarry:brown_lens"
+  },
+  "block": "mysticalagriculture:soulium_ore"
+}

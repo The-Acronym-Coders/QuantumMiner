@@ -1,0 +1,13 @@
+{
+  "conditions": [
+    {
+      "modid": "silentgems",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "weight": 5,
+  "lens": {
+    "item": "quantumquarry:pink_lens"
+  },
+  "block": "silentgems:morganite_block"
+}

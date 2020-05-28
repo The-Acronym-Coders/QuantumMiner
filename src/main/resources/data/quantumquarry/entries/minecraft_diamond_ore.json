@@ -1,0 +1,13 @@
+{
+  "conditions": [
+    {
+      "modid": "minecraft",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "weight": 2,
+  "lens": {
+    "item": "quantumquarry:cyan_lens"
+  },
+  "block": "minecraft:diamond_ore"
+}

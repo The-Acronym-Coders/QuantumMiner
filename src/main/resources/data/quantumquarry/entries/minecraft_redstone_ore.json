@@ -5,14 +5,9 @@
       "type": "forge:mod_loaded"
     }
   ],
-  "weight": 15.0,
+  "weight": 15,
   "lens": {
     "item": "quantumquarry:red_lens"
   },
-  "state": {
-    "block": "minecraft:redstone_ore",
-    "properties": {
-      "lit": "false"
-    }
-  }
+  "block": "minecraft:redstone_ore"
 }

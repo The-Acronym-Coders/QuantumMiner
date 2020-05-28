@@ -1,16 +1,13 @@
 {
   "conditions": [
     {
-      "modid": "minecraft",
+      "modid": "wtbw_core",
       "type": "forge:mod_loaded"
     }
   ],
-  "weight": 10.0,
+  "weight": 30,
   "lens": {
     "item": "quantumquarry:blue_lens"
   },
-  "state": {
-    "block": "minecraft:lapis_ore",
-    "properties": {}
-  }
+  "block": "wtbw_core:cobalt_ore"
 }

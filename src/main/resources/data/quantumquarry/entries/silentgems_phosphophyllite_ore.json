@@ -1,16 +1,13 @@
 {
   "conditions": [
     {
-      "modid": "minecraft",
+      "modid": "silentgems",
       "type": "forge:mod_loaded"
     }
   ],
-  "weight": 2.0,
+  "weight": 5,
   "lens": {
     "item": "quantumquarry:cyan_lens"
   },
-  "state": {
-    "block": "minecraft:diamond_ore",
-    "properties": {}
-  }
+  "block": "silentgems:phosphophyllite_block"
 }

@@ -1,0 +1,13 @@
+{
+  "conditions": [
+    {
+      "modid": "powah",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "weight": 15,
+  "lens": {
+    "item": "quantumquarry:green_lens"
+  },
+  "block": "powah:uraninite_ore"
+}
