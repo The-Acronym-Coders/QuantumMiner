@@ -1,33 +1,29 @@
 package com.teamacronymcoders.quantumquarry.recipe;
 
-import net.minecraft.block.BlockState;
+import net.minecraft.block.Block;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 
 public class MinerEntry {
 
-    private double weight;
+    private int weight;
     private ResourceLocation id;
     private Ingredient lens;
-    private BlockState state;
-    private CompoundNBT data;
+    private Block block;
 
     public MinerEntry() {}
 
-    public MinerEntry(double weight, Ingredient lens, BlockState state, CompoundNBT data) {
+    public MinerEntry(int weight, Ingredient lens, Block block) {
         this.weight = weight;
         this.lens = lens;
-        this.state = state;
-        this.data = data;
+        this.block = block;
     }
 
-    public MinerEntry(double weight, ResourceLocation id, Ingredient lens, BlockState state, CompoundNBT data) {
+    public MinerEntry(int weight, ResourceLocation id, Ingredient lens, Block block) {
         this.weight = weight;
         this.id = id;
         this.lens = lens;
-        this.state = state;
-        this.data = data;
+        this.block = block;
     }
 
     public void setId(ResourceLocation id) {
@@ -38,11 +34,11 @@ public class MinerEntry {
         return id;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public double getWeight() {
+    public int getWeight() {
         return weight;
     }
 
@@ -55,22 +51,13 @@ public class MinerEntry {
         return lens;
     }
 
-    public MinerEntry setState(BlockState state) {
-        this.state = state;
+    public MinerEntry setBlock(Block block) {
+        this.block = block;
         return this;
     }
 
-    public BlockState getState() {
-        return state;
-    }
-
-    public MinerEntry setData(CompoundNBT data) {
-        this.data = data;
-        return this;
-    }
-
-    public CompoundNBT getData() {
-        return data;
+    public Block getBlock() {
+        return block;
     }
 
 }

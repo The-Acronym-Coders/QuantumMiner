@@ -1,4 +1,4 @@
-package com.teamacronymcoders.quantumquarry.misc;
+package com.teamacronymcoders.quantumquarry.recipe;
 
 import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;

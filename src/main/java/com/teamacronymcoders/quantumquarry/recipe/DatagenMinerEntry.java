@@ -7,12 +7,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DatagenMinerEntry {
-    private MinerEntry entry;
-    private List<ICondition> conditions;
+    private final MinerEntry entry;
+    private final List<ICondition> conditions;
 
     public DatagenMinerEntry(MinerEntry entry, ICondition... conditions) {
         this.entry = entry;
-
         this.conditions = new ArrayList<>();
         this.conditions.addAll(Arrays.asList(conditions));
     }

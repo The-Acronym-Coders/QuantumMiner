@@ -3,8 +3,7 @@ package com.teamacronymcoders.quantumquarry.quarry;
 import com.hrznstudio.titanium.component.inventory.SidedInventoryComponent;
 import com.teamacronymcoders.quantumquarry.QuantumConfig;
 import com.teamacronymcoders.quantumquarry.QuantumQuarry;
-import com.teamacronymcoders.quantumquarry.misc.ItemStackKey;
-import com.teamacronymcoders.quantumquarry.misc.RandomCollection;
+import com.teamacronymcoders.quantumquarry.recipe.ItemStackKey;
 import com.teamacronymcoders.quantumquarry.recipe.MinerEntry;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -26,14 +25,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class QuarryHelper {
 
     private static final List<MinerEntry> ENTRIES = new ArrayList<>();
-    private static Map<ItemStackKey, RandomCollection<MinerEntry>> cachedMaps = new HashMap<>();
+    private static Map<ItemStackKey, List<MinerEntry>> cachedMaps = new HashMap<>();
 
     /**
      * @param powerIn Power Stored in the Quarry
@@ -53,7 +51,7 @@ public class QuarryHelper {
      */
     public static int getPowerPerOperationWithEfficiency(ItemStack lens, ItemStack tool) {
         int efficiency = EnchantmentHelper.getEnchantmentLevel(Enchantments.EFFICIENCY, lens) + EnchantmentHelper.getEnchantmentLevel(Enchantments.EFFICIENCY, tool);
-        return Math.min(QuantumConfig.getBaseCost() - (QuantumConfig.getEfficiencyReduction() * efficiency), QuantumConfig.getMinimumPowerDrain());
+        return Math.max(QuantumConfig.getBaseCost() - (QuantumConfig.getEfficiencyReduction() * efficiency), QuantumConfig.getMinimumPowerDrain());
     }
 
     private static boolean doesNotHaveClashingEnchantments(ItemStack lens, ItemStack tool) {
@@ -133,16 +131,18 @@ public class QuarryHelper {
         return false;
     }
 
-    public static RandomCollection<MinerEntry> getMinerEntriesByLens(ItemStack lens) {
+    public static List<MinerEntry> getMinerEntriesByLens(ItemStack lens) {
         ItemStackKey key = new ItemStackKey(lens);
         Predicate<MinerEntry> filter = (lens.isEmpty()) ? entry -> true : entry -> entry.getLens().test(lens);
         if (cachedMaps.containsKey(key)) {
             return cachedMaps.get(key);
         }
-        List<MinerEntry> entries = ENTRIES.stream().filter(filter).collect(Collectors.toList());
-        RandomCollection<MinerEntry> collection = new RandomCollection<>(QuantumQuarry.RANDOM);
+        List<MinerEntry> entries = getEntries().stream().filter(filter).collect(Collectors.toList());
+        List<MinerEntry> collection = new ArrayList<>();
         for (MinerEntry entry : entries) {
-            collection.add(entry.getWeight(), entry);
+            if (entry != null) {
+                collection.add(entry);
+            }
         }
         cachedMaps.put(key, collection);
         return collection;
@@ -150,5 +150,26 @@ public class QuarryHelper {
 
     public static List<MinerEntry> getEntries() {
         return ENTRIES;
+    }
+
+    @Nullable
+    public static MinerEntry getMinerEntry(List<MinerEntry> entries) {
+        int w = 0;
+        if (QuantumConfig.getShouldAirExistInTheQuarryPool()) {
+            w += QuantumConfig.getAirWeightedValue();
+        }
+        for (MinerEntry r : entries) {
+            w += r.getWeight();
+        }
+        if(w <= 0) return null;
+        int number = QuantumQuarry.RANDOM.nextInt(w) + 1;
+        int currentWeight = 0;
+        for (MinerEntry entry : entries) {
+            currentWeight += entry.getWeight();
+            if (currentWeight >= number) {
+                return entry;
+            }
+        }
+        return null;
     }
 }

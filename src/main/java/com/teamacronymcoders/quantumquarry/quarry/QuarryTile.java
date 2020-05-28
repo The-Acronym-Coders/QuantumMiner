@@ -1,5 +1,6 @@
 package com.teamacronymcoders.quantumquarry.quarry;
 
+import com.hrznstudio.titanium.annotation.Save;
 import com.hrznstudio.titanium.api.IFactory;
 import com.hrznstudio.titanium.api.client.IScreenAddon;
 import com.hrznstudio.titanium.block.tile.ActiveTile;
@@ -10,7 +11,6 @@ import com.hrznstudio.titanium.container.addon.IContainerAddon;
 import com.teamacronymcoders.quantumquarry.QuantumConfig;
 import com.teamacronymcoders.quantumquarry.QuantumQuarry;
 import com.teamacronymcoders.quantumquarry.datagen.QuantumTagDataProvider.ItemTags;
-import com.teamacronymcoders.quantumquarry.misc.RandomCollection;
 import com.teamacronymcoders.quantumquarry.recipe.MinerEntry;
 import com.teamacronymcoders.quantumquarry.registry.QuantumQuarryRegistryHandler;
 import net.minecraft.item.DyeColor;
@@ -31,6 +31,7 @@ import java.util.Set;
 
 public class QuarryTile extends ActiveTile<QuarryTile> {
 
+
     private SidedInventoryComponent<QuarryTile> toolInventory;
     private SidedInventoryComponent<QuarryTile> storageInventory;
     private SidedInventoryComponent<QuarryTile> lensInventory;
@@ -40,8 +41,9 @@ public class QuarryTile extends ActiveTile<QuarryTile> {
 
     private final LazyOptional<IEnergyStorage> energyCap = LazyOptional.of(() -> energyStorage);
 
-    private RandomCollection<MinerEntry> cachedEntries;
+    private List<MinerEntry> cachedEntries;
 
+    @Save
     private boolean hold = false;
 
     @SuppressWarnings({"unchecked", "rawtypes"})
@@ -83,8 +85,11 @@ public class QuarryTile extends ActiveTile<QuarryTile> {
         ItemStack lens = getLens();
         MinerEntry entry = getRandomCachedEntry();
         if (entry != null) {
-            ItemStack tool = QuarryHelper.getAppropriateTool(entry.getState(), toolInventory);
+            ItemStack tool = QuarryHelper.getAppropriateTool(entry.getBlock().getDefaultState(), toolInventory);
             handleQuantumQuarry(entry, lens, tool);
+        }
+        if (hold) {
+            handlePowerDrain(lens, ItemStack.EMPTY);
         }
     }
 
@@ -131,13 +136,14 @@ public class QuarryTile extends ActiveTile<QuarryTile> {
         return energyStorage.getEnergyStored();
     }
 
-    public RandomCollection<MinerEntry> getRecipesForCache(ItemStack lens) {
+    public List<MinerEntry> getRecipesForCache(ItemStack lens) {
         return QuarryHelper.getMinerEntriesByLens(lens);
     }
 
+    @Nullable
     public MinerEntry getRandomCachedEntry() {
         if (cachedEntries != null && !cachedEntries.isEmpty()) {
-            return cachedEntries.next();
+            return QuarryHelper.getMinerEntry(cachedEntries);
         }
         return null;
     }
@@ -155,16 +161,16 @@ public class QuarryTile extends ActiveTile<QuarryTile> {
     }
 
     public void handleQuantumQuarry(MinerEntry entry, ItemStack lens, ItemStack tool) {
-        if (!hold && QuarryHelper.canToolBreakBlock(entry.getState(), tool) && world != null && !world.isRemote()) {
-            for (int i = 0; i < QuarryHelper.getAmountOfOperationsForPower(getCurrentEnergy(), lens, tool); i++) {
-                List<ItemStack> generated = QuarryHelper.getDrops(pos, (ServerWorld) world, entry.getState(), lens, tool, null, null);
+        if (!hold && QuarryHelper.canToolBreakBlock(entry.getBlock().getDefaultState(), tool) && world != null && !world.isRemote()) {
+            for (int i = 0; i < Math.min(QuarryHelper.getAmountOfOperationsForPower(getCurrentEnergy(), lens, tool), 20); i++) {
+                List<ItemStack> generated = QuarryHelper.getDrops(pos, (ServerWorld) world, entry.getBlock().getDefaultState(), lens, tool, null, null);
                 for (ItemStack stack : generated) {
                     if (!ItemHandlerHelper.insertItemStacked(storageInventory, stack, false).isEmpty()) {
                         hold = true;
                         break;
                     }
                 }
-                if (hold = true) {
+                if (hold) {
                     break;
                 }
                 if (QuantumConfig.getShouldToolsTakeDamage()) {
