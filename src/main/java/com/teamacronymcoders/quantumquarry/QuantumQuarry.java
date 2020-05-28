@@ -6,6 +6,7 @@ import com.hrznstudio.titanium.recipe.generator.BlockItemModelGeneratorProvider;
 import com.hrznstudio.titanium.tab.TitaniumTab;
 import com.teamacronymcoders.quantumquarry.datagen.QuantumMinerEntryDataProvider;
 import com.teamacronymcoders.quantumquarry.datagen.QuantumTagDataProvider;
+import com.teamacronymcoders.quantumquarry.datagen.lang.QuantumEnglishLangProvider;
 import com.teamacronymcoders.quantumquarry.json.MinerEntryJsonDirector;
 import com.teamacronymcoders.quantumquarry.json.MinerEntryJsonProvider;
 import com.teamacronymcoders.quantumquarry.quarry.QuarryHelper;
@@ -31,7 +32,7 @@ public class QuantumQuarry extends ModuleController {
     public static final String MODID = "quantumquarry";
     public static final Random RANDOM = new Random();
     public static final Logger LOGGER = LogManager.getLogger("Quantum Quarry");
-    public static final TitaniumTab QMTAB = new TitaniumTab("Quantum Quarry", () -> ItemStack.EMPTY);
+    public static final TitaniumTab QMTAB = new TitaniumTab("quantum_quarry", () -> new ItemStack(QuantumQuarryRegistryHandler.quarryBlock.asItem()));
 
     public QuantumQuarry() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -46,6 +47,7 @@ public class QuantumQuarry extends ModuleController {
         event.getGenerator().addProvider(new QuantumMinerEntryDataProvider(event.getGenerator()));
         event.getGenerator().addProvider(new BlockItemModelGeneratorProvider(event.getGenerator(), MODID));
         event.getGenerator().addProvider(new QuantumTagDataProvider.ItemTags(event.getGenerator()));
+        event.getGenerator().addProvider(new QuantumEnglishLangProvider(event.getGenerator()));
     }
 
     @Override

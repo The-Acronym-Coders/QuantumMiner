@@ -189,4 +189,8 @@ public class QuarryTile extends ActiveTile<QuarryTile> {
             energyStorage.setEnergyStored(0);
         }
     }
+
+    public void setHold(boolean hold) {
+        this.hold = hold;
+    }
 }

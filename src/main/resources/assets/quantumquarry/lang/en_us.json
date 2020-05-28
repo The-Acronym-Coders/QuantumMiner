@@ -1,0 +1,21 @@
+{
+  "block.quantumquarry.quarry": "Quantum Quarry",
+  "item.quantumquarry.black_lens": "Black Focusing Lens",
+  "item.quantumquarry.blue_lens": "Blue Focusing Lens",
+  "item.quantumquarry.brown_lens": "Brown Focusing Lens",
+  "item.quantumquarry.cyan_lens": "Cyan Focusing Lens",
+  "item.quantumquarry.gray_lens": "Gray Focusing Lens",
+  "item.quantumquarry.green_lens": "Green Focusing Lens",
+  "item.quantumquarry.light_blue_lens": "Light-Blue Focusing Lens",
+  "item.quantumquarry.light_gray_lens": "Light-Gray Focusing Lens",
+  "item.quantumquarry.lime_lens": "Lime Focusing Lens",
+  "item.quantumquarry.magenta_lens": "Magenta Focusing Lens",
+  "item.quantumquarry.orange_lens": "Orange Focusing Lens",
+  "item.quantumquarry.pink_lens": "Pink Focusing Lens",
+  "item.quantumquarry.plastic_hammer": "Plastic Hammer",
+  "item.quantumquarry.purple_lens": "Purple Focusing Lens",
+  "item.quantumquarry.red_lens": "Red Focusing Lens",
+  "item.quantumquarry.white_lens": "White Focusing Lens",
+  "item.quantumquarry.yellow_lens": "Yellow Focusing Lens",
+  "itemGroup.quantum_quarry": "Quantum Quarry"
+}

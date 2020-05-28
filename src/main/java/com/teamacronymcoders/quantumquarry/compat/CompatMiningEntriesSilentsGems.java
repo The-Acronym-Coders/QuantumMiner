@@ -28,7 +28,7 @@ public class CompatMiningEntriesSilentsGems extends DefaultCompatMiningEntries {
                     5,
                     new ResourceLocation(QuantumQuarry.MODID, "silentgems_ruby_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.RED_LENS.get()),
-                    Gems.RUBY.getBlock()
+                    Gems.RUBY.getOre()
                 ),
                 new ModLoadedCondition("silentgems")
             )
@@ -39,7 +39,7 @@ public class CompatMiningEntriesSilentsGems extends DefaultCompatMiningEntries {
                     5,
                     new ResourceLocation(QuantumQuarry.MODID, "silentgems_garnet_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.ORANGE_LENS.get()),
-                    Gems.GARNET.getBlock()
+                    Gems.GARNET.getOre()
                 ),
                 new ModLoadedCondition("silentgems")
             )
@@ -50,7 +50,7 @@ public class CompatMiningEntriesSilentsGems extends DefaultCompatMiningEntries {
                     5,
                     new ResourceLocation(QuantumQuarry.MODID, "silentgems_topaz_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.ORANGE_LENS.get()),
-                    Gems.RUBY.getBlock()
+                    Gems.RUBY.getOre()
                 ),
                 new ModLoadedCondition("silentgems")
             )
@@ -61,7 +61,7 @@ public class CompatMiningEntriesSilentsGems extends DefaultCompatMiningEntries {
                     5,
                     new ResourceLocation(QuantumQuarry.MODID, "silentgems_amber_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.ORANGE_LENS.get()),
-                    Gems.AMBER.getBlock()
+                    Gems.AMBER.getOre()
                 ),
                 new ModLoadedCondition("silentgems")
             )
@@ -72,7 +72,7 @@ public class CompatMiningEntriesSilentsGems extends DefaultCompatMiningEntries {
                     5,
                     new ResourceLocation(QuantumQuarry.MODID, "silentgems_heliodor_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.YELLOW_LENS.get()),
-                    Gems.HELIODOR.getBlock()
+                    Gems.HELIODOR.getOre()
                 ),
                 new ModLoadedCondition("silentgems")
             )
@@ -83,7 +83,7 @@ public class CompatMiningEntriesSilentsGems extends DefaultCompatMiningEntries {
                     5,
                     new ResourceLocation(QuantumQuarry.MODID, "silentgems_peridot_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.GREEN_LENS.get()),
-                    Gems.PERIDOT.getBlock()
+                    Gems.PERIDOT.getOre()
                 ),
                 new ModLoadedCondition("silentgems")
             )
@@ -94,7 +94,7 @@ public class CompatMiningEntriesSilentsGems extends DefaultCompatMiningEntries {
                     5,
                     new ResourceLocation(QuantumQuarry.MODID, "silentgems_green_sapphire_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.GREEN_LENS.get()),
-                    Gems.GREEN_SAPPHIRE.getBlock()
+                    Gems.GREEN_SAPPHIRE.getOre()
                 ),
                 new ModLoadedCondition("silentgems")
             )
@@ -105,7 +105,7 @@ public class CompatMiningEntriesSilentsGems extends DefaultCompatMiningEntries {
                     5,
                     new ResourceLocation(QuantumQuarry.MODID, "silentgems_phosphophyllite_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.CYAN_LENS.get()),
-                    Gems.PHOSPHOPHYLLITE.getBlock()
+                    Gems.PHOSPHOPHYLLITE.getOre()
                 ),
                 new ModLoadedCondition("silentgems")
             )
@@ -116,7 +116,7 @@ public class CompatMiningEntriesSilentsGems extends DefaultCompatMiningEntries {
                     5,
                     new ResourceLocation(QuantumQuarry.MODID, "silentgems_aquamarine_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.LIGHT_BLUE_LENS.get()),
-                    Gems.AQUAMARINE.getBlock()
+                    Gems.AQUAMARINE.getOre()
                 ),
                 new ModLoadedCondition("silentgems")
             )
@@ -127,7 +127,7 @@ public class CompatMiningEntriesSilentsGems extends DefaultCompatMiningEntries {
                     5,
                     new ResourceLocation(QuantumQuarry.MODID, "silentgems_sapphire_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.BLUE_LENS.get()),
-                    Gems.SAPPHIRE.getBlock()
+                    Gems.SAPPHIRE.getOre()
                 ),
                 new ModLoadedCondition("silentgems")
             )
@@ -138,7 +138,7 @@ public class CompatMiningEntriesSilentsGems extends DefaultCompatMiningEntries {
                     5,
                     new ResourceLocation(QuantumQuarry.MODID, "silentgems_tanzanite_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.PURPLE_LENS.get()),
-                    Gems.TANZANITE.getBlock()
+                    Gems.TANZANITE.getOre()
                 ),
                 new ModLoadedCondition("silentgems")
             )
@@ -149,7 +149,7 @@ public class CompatMiningEntriesSilentsGems extends DefaultCompatMiningEntries {
                     5,
                     new ResourceLocation(QuantumQuarry.MODID, "silentgems_amethyst_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.PURPLE_LENS.get()),
-                    Gems.AMETHYST.getBlock()
+                    Gems.AMETHYST.getOre()
                 ),
                 new ModLoadedCondition("silentgems")
             )
@@ -160,7 +160,7 @@ public class CompatMiningEntriesSilentsGems extends DefaultCompatMiningEntries {
                     5,
                     new ResourceLocation(QuantumQuarry.MODID, "silentgems_agate_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.MAGENTA_LENS.get()),
-                    Gems.AGATE.getBlock()
+                    Gems.AGATE.getOre()
                 ),
                 new ModLoadedCondition("silentgems")
             )
@@ -171,7 +171,7 @@ public class CompatMiningEntriesSilentsGems extends DefaultCompatMiningEntries {
                     5,
                     new ResourceLocation(QuantumQuarry.MODID, "silentgems_morganite_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.PINK_LENS.get()),
-                    Gems.MORGANITE.getBlock()
+                    Gems.MORGANITE.getOre()
                 ),
                 new ModLoadedCondition("silentgems")
             )
@@ -182,7 +182,7 @@ public class CompatMiningEntriesSilentsGems extends DefaultCompatMiningEntries {
                     5,
                     new ResourceLocation(QuantumQuarry.MODID, "silentgems_onyx_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.BLACK_LENS.get()),
-                    Gems.ONYX.getBlock()
+                    Gems.ONYX.getOre()
                 ),
                 new ModLoadedCondition("silentgems")
             )
@@ -193,7 +193,7 @@ public class CompatMiningEntriesSilentsGems extends DefaultCompatMiningEntries {
                     5,
                     new ResourceLocation(QuantumQuarry.MODID, "silentgems_opal_ore"),
                     Ingredient.fromItems(QuantumQuarryRegistryHandler.WHITE_LENS.get()),
-                    Gems.OPAL.getBlock()
+                    Gems.OPAL.getOre()
                 ),
                 new ModLoadedCondition("silentgems")
             )

@@ -3,6 +3,7 @@ package com.teamacronymcoders.quantumquarry.registry;
 import com.hrznstudio.titanium.registry.BlockRegistryObjectGroup;
 import com.teamacronymcoders.quantumquarry.QuantumQuarry;
 import com.teamacronymcoders.quantumquarry.item.ColoredLensItem;
+import com.teamacronymcoders.quantumquarry.item.PlasticHammerItem;
 import com.teamacronymcoders.quantumquarry.quarry.QuarryBlock;
 import com.teamacronymcoders.quantumquarry.quarry.QuarryTile;
 import net.minecraft.block.Block;
@@ -25,6 +26,9 @@ public class QuantumQuarryRegistryHandler {
     public static QuarryBlock quarryBlock;
 
     private static final DeferredRegister<Item> ITEM = new DeferredRegister<>(ForgeRegistries.ITEMS, "quantumquarry");
+
+    // Plastic Hammer
+    public static final RegistryObject<PlasticHammerItem> PLASTIC_HAMMER = ITEM.register("plastic_hammer", PlasticHammerItem::new);
 
     // Lens Items
     public static final RegistryObject<ColoredLensItem> WHITE_LENS = ITEM.register("white_lens", () -> new ColoredLensItem(DyeColor.WHITE));
